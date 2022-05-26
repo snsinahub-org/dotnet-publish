@@ -19,7 +19,7 @@ runs:
   steps:
     - run: |
         Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
-            ${{ inputs.command }} $_
+            echo $_
         }
       shell: powershell
     
