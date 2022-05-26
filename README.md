@@ -1,7 +1,7 @@
 # dotnet-restore
 
 ```YAML
-    - name: donet publis
+    - name: donet publish
       uses : snsinahub-org/dotnet-publish@main
       with:
         path: 'C:\Users\user\'
