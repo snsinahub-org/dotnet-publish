@@ -1,0 +1,26 @@
+name: 'dotnet restore'
+description: 'dotnet restore'
+inputs:
+  path:  # id of input
+    description: 'path'
+    required: true
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-number }}
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        shopt -s globstar
+        for project in ${{ inputs.path }}
+          do dotnet restore $project
+        done
+      shell: bash
+    - id: random-number-generator
+      run: echo "::set-output name=random-number::$(echo $RANDOM)"
+      shell: bash
+    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      shell: bash          
+    - run: goodbye.sh
+      shell: bash
