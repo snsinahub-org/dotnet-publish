@@ -20,7 +20,9 @@ runs:
     - run: |
         cd "${{ inputs.path }}"
         Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
-            ${{ inputs.file_extenstion }} $_
+            command $_
         }
       shell: powershell
+      env: 
+        command: ${{ inputs.file_extenstion }}
     
