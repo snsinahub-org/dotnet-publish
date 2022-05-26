@@ -4,11 +4,20 @@ inputs:
   path:  
     description: 'path'
     required: true
+  test_path:  
+    description: 'test-path'
+    required: true
+  temp_path:  
+    description: 'temp_path'
+    required: true
   file_extenstion:
     description: "file extension"
     required: true
   build_configuration:
     description: "build configuration"
+    required: true
+  test_depth:
+    description: "test_depth"
     required: true
 outputs:
   random-number:
@@ -20,6 +29,18 @@ runs:
     - run: |
         cd "${{ inputs.path }}"
         Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
+            dotnet restore $_
+        }
+      shell: powershell
+    - run: |
+        cd "${{ inputs.path }}"
+        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
             dotnet build $_ --configuration ${{ inputs.build_configuration }} 
+        }
+      shell: powershell
+    - run: |
+        cd "${{ inputs.path }}"
+        Get-ChildItem -Path ".\${{ inputs.test_path }}" -Filter ${{ inputs.file_extenstion }} -Depth ${{ inputs.test_depth }} -Recurse -File -Name| ForEach-Object {            
+            dotnet test $_ --logger trx --results-directory "${{ inputs.temp_path }}" --configuration ${{ inputs.build_configuration }}
         }
       shell: powershell
