@@ -22,7 +22,8 @@ runs:
   steps:
     - run: |
         cd "${{ inputs.path }}"
-        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Depth 1 -Recurse -File -Name| ForEach-Object {             
+        Get-ChildItem -Path .\ -Recurse -Directory -Name| ForEach-Object { 
+            cd "${{ inputs.path }}/$_"            
             dotnet publish --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}/LMI" /property:Version=${{ inputs.newTag }}
         }
       shell: powershell
