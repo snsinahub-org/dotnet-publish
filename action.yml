@@ -7,9 +7,6 @@ inputs:
   file_extenstion:
     description: "file extension"
     required: true
-  command:  
-    description: 'command line'
-    required: true
 outputs:
   random-number:
     description: "Random number"
@@ -20,9 +17,6 @@ runs:
     - run: |
         cd "${{ inputs.path }}"
         Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
-            echo $_
+            dotnet restore $_
         }
       shell: powershell
-      env: 
-        command: ${{ inputs.file_extenstion }}
-    
