@@ -28,13 +28,13 @@ runs:
   steps:
     - run: |
         cd "${{ inputs.path }}"
-        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
+        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Depth 1 -Recurse -File -Name| ForEach-Object {            
             dotnet restore $_
         }
       shell: powershell
     - run: |
         cd "${{ inputs.path }}"
-        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
+        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Depth 1 -Recurse -File -Name| ForEach-Object {            
             dotnet build $_ --configuration ${{ inputs.build_configuration }} 
         }
       shell: powershell
