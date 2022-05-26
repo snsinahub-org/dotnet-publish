@@ -2,7 +2,7 @@
 
 ```YAML
     - name: donet publis
-      uses : snsinahub-org/dotnet-all@main
+      uses : snsinahub-org/dotnet-publish@main
       with:
         path: 'C:\Users\user\'
         file_extenstion: "*.csproj"
