@@ -18,6 +18,7 @@ runs:
   using: "composite"
   steps:
     - run: |
+        cd ${{ inputs.path }}
         Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
             echo $_
         }
