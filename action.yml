@@ -22,8 +22,7 @@ runs:
   steps:
     - run: |
         cd "${{ inputs.path }}"
-        Get-ChildItem -Path .\  -Recurse -Depth 1 -Directory -Name| ForEach-Object { 
-            cd "${{ inputs.path }}/$_"            
+        Get-ChildItem -Path .\  -Recurse -Depth 1 -Directory -Name| ForEach-Object {            
             dotnet publish --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }}
         }
       shell: powershell
