@@ -5,7 +5,7 @@
       uses : snsinahub-org/dotnet-publish@main
       with:
         path: 'C:\Users\user\'
-        temp_path: "*.csproj"
+        temp_path: "temp_path"
         build_configuration: "release"
         newTag: "newTag"
 ```
