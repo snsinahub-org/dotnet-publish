@@ -2,7 +2,7 @@
 
 ```YAML
     - name: donet restore-build-test
-      uses : snsinahub-org/dotnet-build@main
+      uses : snsinahub-org/dotnet-all@main
       with:
         path: 'C:\Users\user\'
         file_extenstion: "*.csproj"
