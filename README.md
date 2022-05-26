@@ -1,7 +1,7 @@
 # dotnet-restore
 
 ```YAML
-    - name: print 2
+    - name: donet restore-build-test
       uses : snsinahub-org/dotnet-build@main
       with:
         path: 'C:\Users\user\'
