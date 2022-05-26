@@ -20,7 +20,7 @@ runs:
     - run: |
         cd "${{ inputs.path }}"
         Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
-            echo $_
+            ${{ inputs.file_extenstion }} $_
         }
       shell: powershell
     
