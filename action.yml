@@ -7,6 +7,9 @@ inputs:
   file_extenstion:
     description: "file extension"
     required: true
+  build_configuration:
+    description: "build configuration"
+    required: true
 outputs:
   random-number:
     description: "Random number"
@@ -17,6 +20,6 @@ runs:
     - run: |
         cd "${{ inputs.path }}"
         Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
-            dotnet restore $_
+            dotnet build $_ --configuration ${{ inputs.build_configuration }} 
         }
       shell: powershell
