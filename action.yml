@@ -4,6 +4,9 @@ inputs:
   path:  
     description: 'path'
     required: true
+  file_extenstion:
+    description: "file extension"
+    required: true
   command:  
     description: 'command line'
     required: true
@@ -15,8 +18,8 @@ runs:
   using: "composite"
   steps:
     - run: |
-        Get-ChildItem -Path .\ -Filter ${{ inputs.path }} -Recurse -File -Name| ForEach-Object {            
-            ${{ inputs.path }} $_
+        Get-ChildItem -Path ${{ inputs.path }}\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
+            ${{ inputs.command }} $_
         }
       shell: powershell
     
