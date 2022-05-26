@@ -18,7 +18,7 @@ runs:
   using: "composite"
   steps:
     - run: |
-        Get-ChildItem -Path ${{ inputs.path }}\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
+        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Recurse -File -Name| ForEach-Object {            
             ${{ inputs.command }} $_
         }
       shell: powershell
