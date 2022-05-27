@@ -22,7 +22,11 @@ runs:
   steps:
     - run: |
         cd "${{ inputs.path }}"
-        Get-ChildItem -Path .\  -Recurse -Depth 1  -Filter wwwroot -Directory -Name  | ForEach-Object {            
-            dotnet publish --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }}
+        Get-ChildItem -Path .\  -Recurse -Include "wwwroot" -Directory  -Name |  ForEach-Object {
+            $pt =  (get-item $_ ).parent.Name
+            cd ../$pt
+            Get-ChildItem -Path ./   -Include "*.csproj" -File  -Name |  ForEach-Object {
+                dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }} 
+            }
         }
       shell: powershell
